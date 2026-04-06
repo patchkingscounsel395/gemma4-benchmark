@@ -1,0 +1,98 @@
+# Benchmark configuration
+# Paths are relative to models_base_dir
+
+models_base_dir: "~/.lmstudio/models"
+
+# Context lengths to test (tokens)
+context_targets: [4096, 8192, 16384, 32768, 65536, 128000, 256000]
+
+# TurboQuant KV cache bits (set to null to disable)
+turboquant_kv_bits: 2.5
+
+# Output files
+results_file: "results/bench_all_results.json"
+report_markdown: "results/BENCHMARK_REPORT.md"
+report_html: "results/benchmark_report.html"
+
+# Model families and their sampling parameters (thinking OFF for all)
+families:
+  gemma4:
+    temperature: 1.0
+    top_p: 0.95
+    enable_thinking: false
+  qwen35:
+    temperature: 0.7
+    top_p: 0.8
+    enable_thinking: false
+
+# Models to benchmark
+# format: display_name, family, path (relative to models_base_dir)
+models:
+  # Gemma 4 E2B (~2B active)
+  - name: "Gemma4-E2B 4bit"
+    family: gemma4
+    path: "mlx-community/gemma-4-e2b-it-4bit"
+  - name: "Gemma4-E2B 8bit"
+    family: gemma4
+    path: "mlx-community/gemma-4-e2b-it-8bit"
+  - name: "Gemma4-E2B bf16"
+    family: gemma4
+    path: "mlx-community/gemma-4-e2b-it-bf16"
+
+  # Gemma 4 E4B (~4B active)
+  - name: "Gemma4-E4B 4bit"
+    family: gemma4
+    path: "mlx-community/gemma-4-e4b-it-4bit"
+  - name: "Gemma4-E4B 8bit"
+    family: gemma4
+    path: "mlx-community/gemma-4-e4b-it-8bit"
+  - name: "Gemma4-E4B bf16"
+    family: gemma4
+    path: "mlx-community/gemma-4-e4b-it-bf16"
+
+  # Gemma 4 26B-A4B (MoE, ~4B active, 26B total)
+  - name: "Gemma4-26B-A4B 4bit"
+    family: gemma4
+    path: "mlx-community/gemma-4-26b-a4b-it-4bit"
+  - name: "Gemma4-26B-A4B 8bit"
+    family: gemma4
+    path: "mlx-community/gemma-4-26b-a4b-it-8bit"
+  - name: "Gemma4-26B-A4B bf16"
+    family: gemma4
+    path: "mlx-community/gemma-4-26b-a4b-it-bf16"
+
+  # Gemma 4 31B (Dense)
+  - name: "Gemma4-31B 4bit"
+    family: gemma4
+    path: "mlx-community/gemma-4-31b-it-4bit"
+
+  # Qwen 3.5 2B
+  - name: "Qwen3.5-2B 4bit"
+    family: qwen35
+    path: "mlx-community/Qwen3.5-2B-MLX-4bit"
+  - name: "Qwen3.5-2B 8bit"
+    family: qwen35
+    path: "mlx-community/Qwen3.5-2B-MLX-8bit"
+  - name: "Qwen3.5-2B bf16"
+    family: qwen35
+    path: "mlx-community/Qwen3.5-2B-MLX-bf16"
+
+  # Qwen 3.5 4B
+  - name: "Qwen3.5-4B 4bit"
+    family: qwen35
+    path: "mlx-community/Qwen3.5-4B-MLX-4bit"
+  - name: "Qwen3.5-4B 8bit"
+    family: qwen35
+    path: "mlx-community/Qwen3.5-4B-MLX-8bit"
+  - name: "Qwen3.5-4B bf16"
+    family: qwen35
+    path: "mlx-community/Qwen3.5-4B-MLX-bf16"
+
+# Model groups for report generation
+model_groups:
+  "Gemma4-E2B": ["Gemma4-E2B 4bit", "Gemma4-E2B 8bit", "Gemma4-E2B bf16"]
+  "Gemma4-E4B": ["Gemma4-E4B 4bit", "Gemma4-E4B 8bit", "Gemma4-E4B bf16"]
+  "Gemma4-26B-A4B": ["Gemma4-26B-A4B 4bit", "Gemma4-26B-A4B 8bit", "Gemma4-26B-A4B bf16"]
+  "Gemma4-31B": ["Gemma4-31B 4bit"]
+  "Qwen3.5-2B": ["Qwen3.5-2B 4bit", "Qwen3.5-2B 8bit", "Qwen3.5-2B bf16"]
+  "Qwen3.5-4B": ["Qwen3.5-4B 4bit", "Qwen3.5-4B 8bit", "Qwen3.5-4B bf16"]

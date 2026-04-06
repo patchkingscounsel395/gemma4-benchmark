@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.egg-info/
+dist/
+build/
+
+# Old benchmark scripts (superseded by bench_run.py + bench_one_model.py)
+bench_26b_8bit.py
+bench_all.py
+bench_rerun_mem.py
+bench_turboquant.py
+
+# Web UI (separate from benchmark)
+app.py
+templates/
+
+# Editor
+.vscode/
+*.swp
